@@ -2,9 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmoothSliderBar : MonoBehaviour
+public class SmoothSliderBar : Bar
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Image _image;
     [SerializeField, Range(0,2)] private float _speed;
 
@@ -14,33 +13,34 @@ public class SmoothSliderBar : MonoBehaviour
     private float _maxFillValue = 1;
     private Coroutine coroutine;
 
-    private void OnEnable()
-    {
-        _health.Decreased += UpdateBar;
-        _health.Increased += UpdateBar;
-        _health.MaxValueChanged += UpdateBar;
-    }
-
-    private void OnDisable()
-    {
-        _health.Decreased -= UpdateBar;
-        _health.Increased -= UpdateBar;
-        _health.MaxValueChanged -= UpdateBar;
-    }
-
     public void Initialize()
     {
-        _maxValue = _health.MaxHealth;
-        _currentValue = _health.CurrentHealth;
+        _maxValue = Health.MaxHealth;
+        _currentValue = Health.CurrentHealth;
 
         _fillPercent = _maxFillValue / _maxValue * _currentValue;
         _image.fillAmount = _fillPercent;
     }
 
+    protected override void IncreaseValues()
+    {
+        UpdateBar();
+    }
+
+    protected override void DecreaseValues()
+    {
+        UpdateBar();
+    }
+
+    protected override void UpdateMaxValue()
+    {
+        UpdateBar();
+    }
+
     private void UpdateBar()
     {
-        _maxValue = _health.MaxHealth;
-        _currentValue = _health.CurrentHealth;
+        _maxValue = Health.MaxHealth;
+        _currentValue = Health.CurrentHealth;
 
         _fillPercent = _maxFillValue / _maxValue * _currentValue;
 

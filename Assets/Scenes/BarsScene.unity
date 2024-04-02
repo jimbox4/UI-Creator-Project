@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393ad7991cfb0b74e8a0a7b4955eabea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 1502973318}
+  Health: {fileID: 1502973318}
   _hertPrefab: {fileID: -4308136514802193187, guid: 7c7cde43c24900d488f65f801d219a75, type: 3}
   _maxValuePerHeart: 4
   _fullSprite: {fileID: 21300000, guid: ce97ccb34f60a6948a233fcac97dabe3, type: 3}
@@ -795,9 +795,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53764cd33049e2342960ff3aebcbab56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 1502973318}
+  Health: {fileID: 1502973318}
   _image: {fileID: 1750163282}
-  _speed: 0.2
+  _speed: 0.152
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48a09ba8df29fe42abf6ab416e3e16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 1502973318}
+  Health: {fileID: 1502973318}
   _image: {fileID: 1777562061}
 --- !u!224 &1757411358
 RectTransform:
@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bedf5531de7b4e4791742cc04ebfdb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 1502973318}
+  Health: {fileID: 1502973318}
   _textCurrentValue: {fileID: 592007954}
   _textMaxValue: {fileID: 1128989608}
 --- !u!114 &1758837207

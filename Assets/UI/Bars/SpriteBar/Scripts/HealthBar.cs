@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : Bar
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Heart _hertPrefab;
     [SerializeField] private int _maxValuePerHeart;
     [Header("Sprites")]
@@ -18,25 +17,11 @@ public class HealthBar : MonoBehaviour
     private int _heartsCount;
     private List<Heart> _hearts = new List<Heart>();
 
-    private void OnEnable()
-    {
-        _health.Increased += UpdateHearts;
-        _health.Decreased += UpdateHearts;
-        _health.MaxValueChanged += UpdateBar;
-    }
-
-    private void OnDisable()
-    {
-        _health.Increased -= UpdateHearts;
-        _health.Decreased -= UpdateHearts;
-        _health.MaxValueChanged -= UpdateBar;
-    }
-
     [ContextMenu(nameof(Initialize))]
     public void Initialize()
     {
-        _currentValue = _health.CurrentHealth;
-        _maxValue = _health.MaxHealth;
+        _currentValue = Health.CurrentHealth;
+        _maxValue = Health.MaxHealth;
 
         _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
@@ -45,9 +30,25 @@ public class HealthBar : MonoBehaviour
         UpdateHearts();
     }
 
+
+    protected override void IncreaseValues()
+    {
+        UpdateHearts();
+    }
+
+    protected override void DecreaseValues()
+    {
+        UpdateHearts();
+    }
+
+    protected override void UpdateMaxValue()
+    {
+        UpdateBar();
+    }
+
     private void UpdateBar()
     {
-        _maxValue = _health.MaxHealth;
+        _maxValue = Health.MaxHealth;
 
         _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
@@ -58,7 +59,7 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateHearts()
     {
-        _currentValue = _health.CurrentHealth;
+        _currentValue = Health.CurrentHealth;
 
         for (int i = 0; i < _hearts.Count; i++)
         {

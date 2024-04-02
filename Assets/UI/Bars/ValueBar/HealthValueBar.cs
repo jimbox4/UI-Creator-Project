@@ -1,41 +1,41 @@
 using TMPro;
 using UnityEngine;
 
-public class HealthValueBar : MonoBehaviour
+public class HealthValueBar : Bar
 {
-    [SerializeField] private Health _health;
     [SerializeField] private TMP_Text _textCurrentValue;
     [SerializeField] private TMP_Text _textMaxValue;
 
     private int _maxValue;
     private int _currentValue;
 
-    private void OnEnable()
-    {
-        _health.Decreased += UpdateValues;
-        _health.Increased += UpdateValues;
-        _health.MaxValueChanged += UpdateValues;
-    }
-
-    private void OnDestroy()
-    {
-        _health.Decreased -= UpdateValues;
-        _health.Increased -= UpdateValues;
-        _health.MaxValueChanged -= UpdateValues;
-    }
-
     public void Initialize()
     {
-        _currentValue = _health.CurrentHealth;
-        _maxValue = _health.MaxHealth;
+        _currentValue = Health.CurrentHealth;
+        _maxValue = Health.MaxHealth;
 
         UpdateValues();
     }
 
-    public void UpdateValues()
+    protected override void DecreaseValues()
     {
-        _maxValue = _health.MaxHealth;
-        _currentValue = _health.CurrentHealth;
+        UpdateValues();
+    }
+
+    protected override void IncreaseValues()
+    {
+        UpdateValues();
+    }
+
+    protected override void UpdateMaxValue()
+    {
+        UpdateValues();
+    }
+
+    private void UpdateValues()
+    {
+        _maxValue = Health.MaxHealth;
+        _currentValue = Health.CurrentHealth;
 
         _textCurrentValue.text = _currentValue.ToString();
         _textMaxValue.text = _maxValue.ToString();
