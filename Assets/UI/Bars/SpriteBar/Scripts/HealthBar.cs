@@ -13,8 +13,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private List<Sprite> _intermediateSprites;
     [Space]
 
-    private int _maxHealth;
-    private int _currentHealth;
+    private int _maxValue;
+    private int _currentValue;
     private int _heartsCount;
     private List<Heart> _hearts = new List<Heart>();
 
@@ -35,10 +35,10 @@ public class HealthBar : MonoBehaviour
     [ContextMenu(nameof(Initialize))]
     public void Initialize()
     {
-        _currentHealth = _health.CurrentHealth;
-        _maxHealth = _health.MaxHealth;
+        _currentValue = _health.CurrentHealth;
+        _maxValue = _health.MaxHealth;
 
-        _heartsCount = Mathf.CeilToInt((float)_maxHealth / _maxValuePerHeart);
+        _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
         Clear();
         Fill();
@@ -47,9 +47,9 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar()
     {
-        _maxHealth = _health.MaxHealth;
+        _maxValue = _health.MaxHealth;
 
-        _heartsCount = Mathf.CeilToInt((float)_maxHealth / _maxValuePerHeart);
+        _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
         Clear();
         Fill();
@@ -58,11 +58,11 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateHearts()
     {
-        _currentHealth = _health.CurrentHealth;
+        _currentValue = _health.CurrentHealth;
 
         for (int i = 0; i < _hearts.Count; i++)
         {
-            int minValue = (int)MathF.Min(_maxValuePerHeart, _currentHealth - _maxValuePerHeart * i);
+            int minValue = (int)MathF.Min(_maxValuePerHeart, _currentValue - _maxValuePerHeart * i);
 
             if (minValue <= 0)
             {
@@ -70,7 +70,7 @@ public class HealthBar : MonoBehaviour
             }
             else if (minValue < _maxValuePerHeart)
             {
-                _hearts[i].ChangeSprite(_intermediateSprites[_currentHealth - _maxValuePerHeart * i - 1]);
+                _hearts[i].ChangeSprite(_intermediateSprites[_currentValue - _maxValuePerHeart * i - 1]);
             }
             else
             {

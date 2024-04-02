@@ -32,7 +32,6 @@ public class HealthValueBar : MonoBehaviour
         UpdateValues();
     }
 
-    [ContextMenu(nameof(UpdateValues))]
     public void UpdateValues()
     {
         _maxValue = _health.MaxHealth;

@@ -10,7 +10,6 @@ public class Heart : MonoBehaviour
         TryGetComponent(out _image);
     }
 
-    [ContextMenu(nameof(Destroy))]
     public void Destroy()
     {
         Destroy(gameObject);
