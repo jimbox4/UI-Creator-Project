@@ -20,8 +20,8 @@ public class HealthBar : Bar
     [ContextMenu(nameof(Initialize))]
     public void Initialize()
     {
-        _currentValue = Health.CurrentHealth;
-        _maxValue = Health.MaxHealth;
+        _currentValue = Health.CurrentValue;
+        _maxValue = Health.MaxValue;
 
         _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
@@ -30,13 +30,7 @@ public class HealthBar : Bar
         UpdateHearts();
     }
 
-
-    protected override void IncreaseValues()
-    {
-        UpdateHearts();
-    }
-
-    protected override void DecreaseValues()
+    protected override void UpdateCurrentValue()
     {
         UpdateHearts();
     }
@@ -48,7 +42,7 @@ public class HealthBar : Bar
 
     private void UpdateBar()
     {
-        _maxValue = Health.MaxHealth;
+        _maxValue = Health.MaxValue;
 
         _heartsCount = Mathf.CeilToInt((float)_maxValue / _maxValuePerHeart);
 
@@ -59,7 +53,7 @@ public class HealthBar : Bar
 
     private void UpdateHearts()
     {
-        _currentValue = Health.CurrentHealth;
+        _currentValue = Health.CurrentValue;
 
         for (int i = 0; i < _hearts.Count; i++)
         {

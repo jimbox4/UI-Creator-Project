@@ -8,26 +8,21 @@ public class SmoothSliderBar : Bar
     [SerializeField, Range(0,2)] private float _speed;
 
     private float _fillPercent;
+    private float _maxFillValue = 1;
     private int _maxValue;
     private int _currentValue;
-    private float _maxFillValue = 1;
-    private Coroutine coroutine;
+    private Coroutine _coroutine;
 
     public void Initialize()
     {
-        _maxValue = Health.MaxHealth;
-        _currentValue = Health.CurrentHealth;
+        _maxValue = Health.MaxValue;
+        _currentValue = Health.CurrentValue;
 
         _fillPercent = _maxFillValue / _maxValue * _currentValue;
         _image.fillAmount = _fillPercent;
     }
 
-    protected override void IncreaseValues()
-    {
-        UpdateBar();
-    }
-
-    protected override void DecreaseValues()
+    protected override void UpdateCurrentValue()
     {
         UpdateBar();
     }
@@ -39,17 +34,17 @@ public class SmoothSliderBar : Bar
 
     private void UpdateBar()
     {
-        _maxValue = Health.MaxHealth;
-        _currentValue = Health.CurrentHealth;
+        _maxValue = Health.MaxValue;
+        _currentValue = Health.CurrentValue;
 
         _fillPercent = _maxFillValue / _maxValue * _currentValue;
 
-        if (coroutine != null)
+        if (_coroutine != null)
         {
-            StopCoroutine(coroutine);
+            StopCoroutine(_coroutine);
         }
         
-        coroutine = StartCoroutine(ChangineValue());
+        _coroutine = StartCoroutine(ChangineValue());
     }
 
     private IEnumerator ChangineValue()

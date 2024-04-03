@@ -3,50 +3,48 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private int _currentHealth;
+    [SerializeField] private int _maxValue;
+    [SerializeField] private int _currentValue;
     [Header("Input values")]
     [SerializeField] private int _damage;
     [SerializeField] private int _heal;
     [SerializeField] private int _limitIncrease;
     [SerializeField] private int _limitDecrease;
 
-    public event Action Increased;
-    public event Action Decreased;
     public event Action MaxValueChanged;
+    public event Action CurrentValueChanged;
 
-    public int CurrentHealth => _currentHealth;
-    public int MaxHealth => _maxHealth;
+    public int CurrentValue => _currentValue;
+    public int MaxValue => _maxValue;
 
     public void IncreaseValue()
     {
-        _currentHealth = Mathf.Clamp(_currentHealth + _heal, 0, _maxHealth);
-        Increased?.Invoke();
+        _currentValue = Mathf.Clamp(_currentValue + _heal, 0, _maxValue);
+        CurrentValueChanged?.Invoke();
     }
 
     public void DecreaseValue() 
     {
-        _currentHealth = Mathf.Clamp(_currentHealth - _damage, 0, _maxHealth);
-        Decreased?.Invoke();
+        _currentValue = Mathf.Clamp(_currentValue - _damage, 0, _maxValue);
+        CurrentValueChanged?.Invoke();
     }
 
     public void IncreaseMaxValue()
     {
-        _maxHealth += _limitIncrease;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _maxValue += _limitIncrease;
         MaxValueChanged?.Invoke();
     }
 
     public void DecreaseMaxValue()
     {
-        _maxHealth -= _limitDecrease;
+        _maxValue -= _limitDecrease;
 
-        if (_maxHealth < 0)
+        if (_maxValue < 0)
         {
-            _maxHealth = 0;
+            _maxValue = 0;
         }
 
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+        _currentValue = Mathf.Clamp(_currentValue, 0, _maxValue);
         MaxValueChanged?.Invoke();
     }
 }

@@ -1,26 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Bar : MonoBehaviour
 {
-    [SerializeField] protected Health Health;
+    [field:SerializeField] protected Health Health { private set; get; } = new Health();
 
     private void OnEnable()
     {
-        Health.Increased += IncreaseValues;
-        Health.Decreased += DecreaseValues;
+        Health.CurrentValueChanged += UpdateCurrentValue;
         Health.MaxValueChanged += UpdateMaxValue;
     }
 
     private void OnDisable()
     {
-        Health.Increased -= IncreaseValues;
-        Health.Decreased -= DecreaseValues;
+        Health.CurrentValueChanged -= UpdateCurrentValue;
         Health.MaxValueChanged -= UpdateMaxValue;
     }
 
-    protected abstract void IncreaseValues();
-    protected abstract void DecreaseValues();
     protected abstract void UpdateMaxValue();
+    protected abstract void UpdateCurrentValue();
 }

@@ -6,38 +6,19 @@ public class HealthValueBar : Bar
     [SerializeField] private TMP_Text _textCurrentValue;
     [SerializeField] private TMP_Text _textMaxValue;
 
-    private int _maxValue;
-    private int _currentValue;
-
     public void Initialize()
     {
-        _currentValue = Health.CurrentHealth;
-        _maxValue = Health.MaxHealth;
-
-        UpdateValues();
+        UpdateMaxValue();
+        UpdateCurrentValue();
     }
 
-    protected override void DecreaseValues()
+    protected override void UpdateCurrentValue()
     {
-        UpdateValues();
-    }
-
-    protected override void IncreaseValues()
-    {
-        UpdateValues();
+        _textCurrentValue.text = Health.CurrentValue.ToString();
     }
 
     protected override void UpdateMaxValue()
     {
-        UpdateValues();
-    }
-
-    private void UpdateValues()
-    {
-        _maxValue = Health.MaxHealth;
-        _currentValue = Health.CurrentHealth;
-
-        _textCurrentValue.text = _currentValue.ToString();
-        _textMaxValue.text = _maxValue.ToString();
+        _textMaxValue.text = Health.MaxValue.ToString();
     }
 }

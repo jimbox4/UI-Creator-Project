@@ -14,12 +14,7 @@ public class SliderBar : Bar
         UpdateBar();
     }
 
-    protected override void DecreaseValues()
-    {
-        UpdateBar();
-    }
-
-    protected override void IncreaseValues()
+    protected override void UpdateCurrentValue()
     {
         UpdateBar();
     }
@@ -31,8 +26,8 @@ public class SliderBar : Bar
 
     private void UpdateBar()
     {
-        _maxValue = Health.MaxHealth;
-        _currentValue = Health.CurrentHealth;
+        _maxValue = Health.MaxValue;
+        _currentValue = Health.CurrentValue;
 
         float fillPercent = _maxFillValue / _maxValue * _currentValue;
 
