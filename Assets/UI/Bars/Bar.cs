@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Bar : MonoBehaviour
 {
-    [field:SerializeField] protected Health Health { private set; get; } = new Health();
+    [field:SerializeField] protected Health Health { private set; get; }
 
     private void OnEnable()
     {
